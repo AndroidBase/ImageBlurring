@@ -28,6 +28,9 @@ public class FastBlurFragment extends Fragment {
 
     private ImageView image;
     private TextView text;
+    /**
+     *单选框
+     */
     private CheckBox downScale;
     private TextView statusText;
 
@@ -61,7 +64,13 @@ public class FastBlurFragment extends Fragment {
         });
     }
 
+    /**
+     * 压缩
+     * @param bkg
+     * @param view
+     */
     private void blur(Bitmap bkg, View view) {
+        //获取系统时间
         long startMs = System.currentTimeMillis();
         float scaleFactor = 1;
         float radius = 20;
@@ -81,6 +90,7 @@ public class FastBlurFragment extends Fragment {
 
         overlay = FastBlur.doBlur(overlay, (int) radius, true);
         view.setBackground(new BitmapDrawable(getResources(), overlay));
+        //计算所需时间
         statusText.setText(System.currentTimeMillis() - startMs + "ms");
     }
 
@@ -89,6 +99,10 @@ public class FastBlurFragment extends Fragment {
         return "Fast blur";
     }
 
+    /**
+     * 添加单选框及文本框
+     * @param container
+     */
     private void addCheckBoxes(ViewGroup container) {
 
         downScale = new CheckBox(getActivity());
